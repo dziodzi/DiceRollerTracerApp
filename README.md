@@ -1,11 +1,40 @@
+# DiceRollerTracesApp
+
+Это приложение с интеграцией распределённой трассировки и использованием
+OpenTelemetry симулирует подбрасывание кубика.
+
+---
+
+## Инструкция по запуску
+
+**1.** Установите зависимостей:
+
 ```
 pip install -r requirements.txt
 ```
+
+**2.** Запустите приложение:
 
 ```
 flask run -p 8080
 ```
 
+**3.** Поднимите контейнеры с **Grafana** и **Jaeger**:
+
 ```
-docker run -d --name jaeger -e COLLECTOR_ZIPKIN_HTTP_PORT=9411 -p 5775:5775 -p 6831:6831/udp -p 6832:6832/udp -p 5778:5778 -p 16686:16686 -p 14268:14268 -p 14250:14250 -p 14255:14255 -p 4317:4317 -p 4318:4318 jaegertracing/all-in-one:latest     
+docker-compose up
 ```
+
+---
+
+## Скриншоты трейсов из Grafana
+
+- **tags:** error =true
+![](images/img.png)
+  
+- **operation name:** processing_span_0
+  
+![](images/img_1.png)
+  
+- **Min Duration:** 200ms
+![](images/img_2.png)
